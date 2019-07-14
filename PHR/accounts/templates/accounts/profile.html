@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block head_title %} Profile | {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 col-sm-8 col-xs-8 col-sm-offset- col-xs-offset-1">
+        <div class="row">
+            <div class="col-sm-4 col-xs-6">
+                {% if user.userprofile.image %}
+                <img src="{{ user.userprofile.image.url }}" class="img-responsive">
+                {% endif %}
+            </div>
+            <div class="col-sm-4">
+                <br>
+                <br>
+                {% if user.get_full_name %}
+                <h3>{{ user.get_full_name }}</h3>
+                {% else %}
+                <h3><b>@{{ user.username }}</b></h3>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <br>
+
+
+<ul style="display: inline-flex;list-style: none; padding:0px; margin: 0px">
+    <li style="margin-right:20px">
+        <b><a style="color: #cc0000" href="{% url 'accounts:about' %}">About</a></b>
+    </li><li>
+        <b><a style="color: #cc0000;margin-right:20px" href="{% url 'accounts:edit_profile' %}">Edit profile</a></b>
+    </li>
+    <li>
+        <b><a style="color: #cc0000; margin-right:20px" href="{%  url 'accounts:edit_info' %}">Edit info</a></b>
+    </li><li>
+        <b><a style="color: #cc0000; margin-right:20px" href="">Timeline</a></b>
+    </li>
+    <li>
+        <b><a style="color: #cc0000; margin-right:20px" href="{% url 'accounts:story_create' username=user %}">Add Story</a></b>
+    </li>
+
+</ul>
+
+
+        <br><br>
+        <br><br>
+
+        <!--
+    <p>First name: {{ user.first_name }}</p>
+    <p>Last name: {{ user.last_name }}</p>
+    <p>Age: {{ user.userprofile.age}}</p>
+    <p>Permanent Address: {{ user.userprofile.permanent_address }}</p>
+    <p>Present Address: {{ user.userprofile.present_address }}</p>
+    <p>Phone: {{ user.userprofile.phone }}</p>
+        -->
+
+
+
+
+    </div>
+
+<!-- Start Right col -->
+        <div class="col-md-3 col-sm-3 col-xs-3">
+
+
+
+             <!-- Search here -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4><b>SEARCH</b></h4>
+                </div>
+
+
+                    <form method="GET" action="" class="navbar-form">
+                            <div>
+                                <div class="input-group">
+                            <input class="form-control" type="text" name="q" placeholder="Search posts" value="{{ request.GET.q }}">
+                                    <span class="input-group-btn">
+                                        <!--<input class="btn btn-default" type="submit" value="Search">-->
+                                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                    </form>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <a href="{% url 'maps' %}" target="_blank"> <h5 style="color: #4da6ff;"><i class="fa fa-map-marker" aria-hidden="true"></i> <b>Your Nearby Places (Map)</b></h5></a>
+
+
+            <!-- End Search -->
+        </div> <!--End Right col-->
+</div>
+<br>
+
+<div class="row">
+    <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+        {% for st in objects %}
+
+        {% if st.image %}
+        <a href="{{ st.get_absolute_url }}"> <img src="{{ st.image.url }}" class="img-responsive" style="width:400px; height: 400px"></a>
+        {% endif %}
+
+        <h3 style="color: #4da6ff"><a href="{{ st.get_absolute_url }}"><b>{{ st.disease_name }}</b></a></h3>
+
+        <i class="fa fa-clock-o"></i> {{ st.publish }}
+       <i class="fa fa-user" style="margin-left: 10px"></i> {{ st.doctor_name }}
+
+        <p><b>{{ st.content|safe|linebreaks|truncatechars_html:200 }}</b></p>
+
+
+
+
+        <br>
+        <br>
+        <hr>
+        <br>
+        {% endfor %}
+
+    {% if objects.has_other_pages %}
+    <ul class="pagination">
+          <li class="page-item">    <!-- Jump to First Page -->
+            {% if objects.number != 1 %}
+               <li class="previous">
+                  <a href="?page=1">
+                    <span aria-hidden="true">&laquo;</span></a>
+            {% else %}
+                <li class="previous disabled">
+                <a><span aria-hidden="true">&laquo;</span></a>
+            {% endif %}
+          </li>
+          <li class="page-item">  <!-- Jump to Prvious Page -->
+            {% if objects.has_previous %}
+               <li class="previous"> <a href="?page={{ objects.previous_page_number }}
+               {% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+               <span aria-hidden="true">‹</span></a>
+            {% else %}
+                <li class="previous disabled"><a>‹</a>
+            {% endif %}
+          </li>
+          {% if objects.has_previous %}
+          <li class="page-item">  <!-- Show Previous 4 page numbers -->
+              <li class="previous"> <a class = "skip_prev" href = "">...</a></li>
+          {% else %}
+                <li class="next disabled"><a>...</a>
+          {% endif %}
+          </li>
+          {% for i in "12345" %}
+        <!-- Change the range ("12345") according to your choice to show numbers -->
+            <li class="pg" data = {{i}}><a class = "page_number" href=""></a>
+          {% endfor %}
+
+          {% if story.has_next %}
+          <li class="page-item">  <!-- Show next 4 page numbers -->
+              <li class="previous"> <a class = "skip_next" href = "">...</a></li>
+          {% else %}
+                <li class="next disabled"><a>...</a>
+          {% endif %}
+          </li>
+          <li class="page-item">  <!-- Jump to Next Page -->
+            {% if objects.has_next %}
+              <li class="previous"> <a href="?page={{ objects.next_page_number }}
+                {% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">›</a></li>
+            {% else %}
+                <li class="next disabled"><a>›</a>
+            {% endif %}
+          </li>
+          <li class="page-item">  <!-- Jump to Last Page -->
+            {% if objects.number != objects.paginator.num_pages %}
+              <li class="previous"> <a href="?page={{ objects.paginator.num_pages }}
+                {% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">»</a></li>
+            {% else %}
+                <li class="next disabled"><a>»</a>
+            {% endif %}
+          </li>
+        </ul>
+    {% endif %}
+
+
+
+
+
+
+
+    </div>
+
+</div>
+{% endblock content %}

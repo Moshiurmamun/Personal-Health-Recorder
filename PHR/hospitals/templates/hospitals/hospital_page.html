@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <div class="col-sm-4 col-sm-offset-1">
+
+<h3><b>{{ instance.name }}</b></h3>
+    <br>
+        {% if instance.image %}
+        <img src="{{ instance.image.url }}" class="img-responsive">
+        {% endif %}
+<br>
+        <p>{{ instance.description }}</p>
+        <p>Address: {{ instance.address }}</p>
+
+    </div>
+
+
+
+        <div class="col-sm-7">
+<br>
+<br>
+            <div class="row">
+                <div class="col-sm-12">
+
+                <div class="col-sm-4">
+                    <img src="/static/css/s.jpg" class="img-circle" style="width:140px">
+                </div>
+                    <div class="col-sm-8">
+
+                        <h3>Assoc. Prof. Dr. Umme Salma Khan</h3>
+                        <p>MBBS, MD (Cardiology)</p>
+                    </div>
+
+
+                <div class="col-sm-12">
+
+            <p>Associate Professor, Dept. of Cardiology, MH Samorita Hospital & Medical College.</p>
+
+            <b>Chamber</b>
+            <p>Tejgaon, Dhaka</p>
+            <b>Fees</b>
+            <p>New appointment: 400 TK.</p>
+                    <a href="{% url 'hospitals:doctor_page' %}">  <button class="btn btn-primary">View Profile</button></a>
+                    <hr>
+
+                </div>
+                </div><!-- End First Doctor  -->
+
+
+
+                 <div class="col-sm-12">
+
+                <div class="col-sm-4">
+                    <img src="/static/css/download.jpg" class="img-circle" style="width:140px">
+                </div>
+                    <div class="col-sm-8">
+                        <h3>Dr. Lutfor Rahman</h3>
+                        <p>MBBS (DMC), FCPS (Pediatric)</p>
+                    </div>
+
+
+                <div class="col-sm-12">
+
+            <p>Senior Consultant & Head, Dept. of Pediatrics, Khidmah Hospital</p>
+
+            <b>Chamber</b>
+            <p>Building -2, Room -2003, Khilgaon, Dhaka</p>
+            <b>Fees</b>
+            <p>New appointment: 500 TK.</p>
+                    <a href="{% url 'hospitals:doctor_page' %}">  <button class="btn btn-primary">View Profile</button></a>
+                    <hr>
+
+                </div>
+                </div>
+
+        </div>
+
+        </div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %}{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock %}
+
+
+{% load crispy_forms_tags %}
+
+{% block head_title %}Register | {{ block.super }}{% endblock head_title %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+  <h3 class="text-center">Register Here</h3>
+          <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" class="btn btn-primary" value="Create an account"></input>
+          </form>
+        <br>
+        <div class=" text-muted text-center">
+            <p style="margin-bottom: 100px;">Already have an account? <a href="{% url 'accounts:login' %}">Log in</a></p>
+          <br>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

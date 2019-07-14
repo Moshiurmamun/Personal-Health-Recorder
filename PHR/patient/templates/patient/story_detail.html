@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head_title %} {{ instance.disease_name }} | {{ block.super }}{% endblock head_title %}
+
+
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+
+        {% if instance.image %}
+        <img src="{{ instance.image.url }}" class="img-responsive" style="width: 600px">
+        {% endif %}
+
+        <h3><b>{{ instance.disease_name }}</b></h3>
+        <a href="{% url 'accounts:story_update' slug=instance.slug %}" style="margin-right: 20px"><input type="submit" class="btn btn-primary" value="Edit"></a>
+
+        <a href="{% url 'accounts:story_delete' slug=instance.slug %}"><input type="submit" class="btn btn-danger" value="Delete"></a>
+
+        <br>
+
+        <i class="fa fa-clock-o"></i> {{ instance.publish }}
+        <i class="fa fa-user" style="margin-left: 10px"></i> {{ instance.doctor_name }}
+        <p><b>{{ instance.content|safe|linebreaks }}</b></p>
+
+    </div>
+
+</div>
+
+{% endblock %}

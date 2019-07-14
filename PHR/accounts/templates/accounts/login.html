@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}Login | {{ block.super }}{% endblock head_title %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4 col-sm-8 col-md-offset-4 col-sm-offset-2">
+
+
+
+  <h3 class="card-title text-center" style="margin-top: 50px">Login here</h3>
+          <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy}}
+            <input type="submit" class="btn btn-primary" value="Login"></input>
+          </form>
+		  <br>
+		  <div class="card-footer text-muted text-center">
+        <p style="margin-bottom: 260px">New to PHR? <a href="{% url 'accounts:register' %}" >Register</a></p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

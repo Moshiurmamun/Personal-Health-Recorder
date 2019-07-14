@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+<div class="col-sm-10 col-sm-offset-1">
+    <div class="row">
+
+                <div class="col-sm-4">
+                    <img src="/static/css/s.jpg" class="img-circle" style="width:140px">
+                </div>
+                    <div class="col-sm-8">
+                        <h3>Assoc. Prof. Dr. Umme Salma Khan</h3>
+                        <p>MBBS, MD (Cardiology)</p>
+                    </div>
+    </div>
+
+
+                <div class="col-sm-8">
+
+            <p>Associate Professor, Dept. of Cardiology, MH Samorita Hospital & Medical College.</p>
+                    <h3 style="color: #4da6ff"><i class="fa fa-stethoscope" aria-hidden="true"></i> <b>Specialist in</b></h3>
+                    <p>Cardiology</p>
+
+            <b>Chamber</b>
+            <p>Tejgaon, Dhaka</p>
+            <b>Fees</b>
+            <p>New appointment: 400 TK.</p>
+            <p>Old patient: 300 TK.</p>
+                    <br>
+
+                    <button class="btn btn-primary"><i class="fa fa-calendar-o" aria-hidden="true"></i>  Book Appointment</button>
+
+
+
+                </div>
+    <div class="col-sm-4">
+        <h3 style="color: #4da6ff;"><i class="fa fa-map-marker" aria-hidden="true"></i> <b>Chamber(s) Location(Map)</b></h3>
+        <br>
+        <h4><b>Google</b></h4>
+        <p><b>This page can't load Google Maps correctly.</b></p>
+        <br>
+        <b>Map not available</b>
+
+    </div>
+                </div>
+{% endblock %}
